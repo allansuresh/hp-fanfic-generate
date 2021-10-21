@@ -1,9 +1,8 @@
 
-# Crossovers Using GPT-3
-
-This is a project that uses a finetuned model of OpenAI's GPT-3 to generate user-defined crossover scripts between DC and Marvel.
-
-The model was finetuned using film scripts from the MCU and DCEU, formatted in the form of JSONL {"prompt":"<prev_dialogue>\n<Speaker>:","completion":"dialogue"} pairs.  Owing to limited data, this finetuning was limited to main characters, so it will work best with those characters.  Skip [here](#run) to try it.
+# Harry Potter fan-fiction generator using Markov chain principle
+This is a project that uses an ML model base on Markov chain principle, to generate short Harry Potter fan-fictions.
+An extract from Harry Potter and the Prisoner of Askaban has been used to train the model.
+Skip [here](#run) to try it.
 
 ## Setup
 
