@@ -1,4 +1,5 @@
-#import all required packages
+#import all required packages, such as numpy, pandas, nltk  
+#venv folder in the repo contains all these and more
 import numpy as np
 import pandas as pd
 import os
