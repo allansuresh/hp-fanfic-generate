@@ -22,3 +22,9 @@ $ python3 -m venv venv
 $ source venv/bin/activate
 ```
 
+
+
+## Run
+
+To run the fan-fiction generator, run the 'fanfic.py' program on the virtual environment.
+
