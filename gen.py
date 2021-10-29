@@ -7,7 +7,6 @@ import re
 import string
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
->>>>>>> d7de3abbf1ca39b7bc805b41a26ec665903f7ba0
 import random
 
 #Generate fanfic stories
