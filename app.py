@@ -1,8 +1,11 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import subprocess
 import json
 
 app = Flask(__name__)
+
+CORS(app, resources={r"/*": {"origins": ["https://allansuresh.com"]}})
 
 @app.route('/generate', methods=['POST'])
 def generate_story():
