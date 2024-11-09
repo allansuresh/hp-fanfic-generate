@@ -11,6 +11,8 @@ CORS(app, resources={r"/*": {"origins": ["https://allansuresh.com"]}})
 
 @app.route('/generate', methods=['POST'])
 def generate_story():
+    if request.method == 'OPTIONS':
+        return jsonify({'success': True}), 200  # Respond to the preflight request
     try:
         # Get JSON data from the POST request
         data = request.get_json()
