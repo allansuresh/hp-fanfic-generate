@@ -8,7 +8,7 @@ nltk.download('punkt')
 app = Flask(__name__)
 
 #CORS(app, resources={r"/*": {"origins": ["https://allansuresh.com"]}})
-CORS(app,supports_credentials=True)
+CORS(app, resources={r"/generate": {"origins": "https://allansuresh.com"}}, supports_credentials=True)
 
 @app.route('/generate', methods=['POST'])
 def generate_story():
