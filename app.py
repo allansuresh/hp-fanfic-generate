@@ -7,8 +7,15 @@ import nltk
 nltk.download('punkt')
 app = Flask(__name__)
 
-#CORS(app, resources={r"/*": {"origins": ["https://allansuresh.com"]}})
-CORS(app, resources={r"/generate": {"origins": "https://allansuresh.com"}}, supports_credentials=True)
+CORS(app, resources={r"/*": {"origins": ["https://allansuresh.com/"]}},supports_credentials=True)
+
+@app.after_request
+def add_cors_headers(response):
+    response.headers.add('Access-Control-Allow-Origin', 'https://allansuresh.com/')
+    response.headers.add('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
+    response.headers.add('Access-Control-Allow-Headers', 'Content-Type, Authorization')
+    return response
+
 
 @app.route('/generate', methods=['POST'])
 def generate_story():
