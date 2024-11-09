@@ -30,6 +30,8 @@ def read_input_file(input_file: Path) -> List[str]:
     
     except Exception as e:
         raise Exception(f"Error reading input file: {str(e)}")
+    
+    pass
 
 def enhance_story(story: str) -> str:
     """
@@ -50,7 +52,9 @@ def enhance_story(story: str) -> str:
         
     return story
 
-def main(start_phrase: str, word_limit: int) -> str:
+    pass
+
+def generate_fanfic(start_phrase: str, word_limit: int) -> str:
     """
     Main function to generate fan fiction with improved error handling and formatting
     """
@@ -73,8 +77,6 @@ def main(start_phrase: str, word_limit: int) -> str:
         # Generate story with improved formatting
         raw_story = generate_story(markov_model, start=start_phrase, limit=word_limit)
         enhanced_story = enhance_story(raw_story)
-
-        print(enhanced_story)
         
         return enhanced_story
 
@@ -82,6 +84,8 @@ def main(start_phrase: str, word_limit: int) -> str:
         error_msg = f"Error generating story: {str(e)}"
         print(error_msg)
         return error_msg
+    
+    pass
 
 def parse_arguments() -> tuple:
     """
@@ -100,10 +104,3 @@ def parse_arguments() -> tuple:
         word_limit = 100
     
     return start_phrase, word_limit
-
-if __name__ == "__main__":
-    # Parse command line arguments
-    start_phrase, word_limit = parse_arguments()
-    
-    # Generate the story
-    main(start_phrase, word_limit)

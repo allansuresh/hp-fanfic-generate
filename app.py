@@ -15,26 +15,17 @@ def generate_story():
         if not data:
             return jsonify({'success': False, 'error': 'No JSON data provided'}), 400
 
-        # Convert the JSON data to a string argument for the Python script
-        input_json = json.dumps(data)
+        # Extract parameters
+        start_phrase = data.get('start', 'harry potter')
+        word_limit = int(data.get('limit', 100))
 
-        # Construct the command to run fanfic.py with JSON input
-        command = ['python3', 'fanfic.py', input_json]
+        # Generate the story directly
+        story = generate_fanfic(start_phrase, word_limit)
 
-        # Run the Python script and capture the output
-        result = subprocess.run(command, capture_output=True, text=True)
-
-        # Check for errors in script execution
-        if result.returncode != 0:
-            return jsonify({'success': False, 'error': result.stderr}), 500
-
-        # Parse the output JSON from the script
-        output = json.loads(result.stdout)
-
-        return jsonify({'success': True, 'story': output['story'], 'parameters': output['parameters']})
+        return jsonify({'success': True, 'story': story})
 
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)}), 500
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run()
