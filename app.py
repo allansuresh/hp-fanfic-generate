@@ -2,7 +2,9 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from fanfic import generate_fanfic
 import os
+import nltk
 
+nltk.download('punkt')
 app = Flask(__name__)
 
 CORS(app, resources={r"/*": {"origins": ["https://allansuresh.com"]}})
