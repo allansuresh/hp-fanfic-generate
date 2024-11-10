@@ -54,14 +54,11 @@ def enhance_story(story: str) -> str:
 
     pass
 
-def generate_fanfic(start_phrase: str, word_limit: int) -> str:
+def generate_fanfic(start_phrase: str, word_limit: int, markov_model) -> str:
     """
     Main function to generate fan fiction with improved error handling and formatting
     """
     try:
-         # Use the global `markov_model` directly for generation
-        global markov_model
-        
         # Generate story with improved formatting
         raw_story = generate_story(markov_model, start=start_phrase, limit=word_limit)
         enhanced_story = enhance_story(raw_story)
@@ -92,7 +89,4 @@ def parse_arguments() -> tuple:
         word_limit = 100
     
     return start_phrase, word_limit
-
-if __name__ == "__main__":
-    print(generate_fanfic("harry potter", 100))
 

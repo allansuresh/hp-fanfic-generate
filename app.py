@@ -41,7 +41,7 @@ def generate_story():
         word_limit = int(data.get('limit', 100))
 
         # Generate the story using the pre-loaded model
-        story = generate_fanfic(start_phrase, word_limit)
+        story = generate_fanfic(start_phrase, word_limit, markov_model)
 
         return jsonify({'success': True, 'story': story})
 
@@ -51,3 +51,16 @@ def generate_story():
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))
     app.run(host='0.0.0.0', port=port)
+
+# if __name__ == '__main__':
+#     # Simulate test data
+#     test_data = {
+#         "start": "harry potter",
+#         "limit": 100
+#     }
+    
+#     # Manually call the `generate_story` function and print the output
+#     with app.test_request_context(json=test_data):
+#         response = generate_story()
+#         print(response.get_json())  # Print the JSON response to see the message
+
