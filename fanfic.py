@@ -59,20 +59,8 @@ def generate_fanfic(start_phrase: str, word_limit: int) -> str:
     Main function to generate fan fiction with improved error handling and formatting
     """
     try:
-        # Read the Harry Potter input file
-        print("Reading file...")
-        input_file = Path(__file__).parent / "hp.txt"
-        
-        if not input_file.exists():
-            raise FileNotFoundError(f"Story file not found: {input_file}")
-        
-        stories = read_input_file(input_file)
-        
-        # Clean the data and create model
-        cleaned_text = clean_txt(stories)
-        
-
-        markov_model = make_markov_model(cleaned_text)
+         # Use the global `markov_model` directly for generation
+        global markov_model
         
         # Generate story with improved formatting
         raw_story = generate_story(markov_model, start=start_phrase, limit=word_limit)
@@ -104,3 +92,7 @@ def parse_arguments() -> tuple:
         word_limit = 100
     
     return start_phrase, word_limit
+
+if __name__ == "__main__":
+    print(generate_fanfic("harry potter", 100))
+

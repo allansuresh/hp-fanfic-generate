@@ -1,21 +1,28 @@
+# app.py
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from fanfic import generate_fanfic
+import pickle
 import os
 import nltk
 
+from fanfic import generate_fanfic
+
 nltk.download('punkt')
+
 app = Flask(__name__)
 
-CORS(app, resources={r"/*": {"origins": ["https://allansuresh.com"]}},supports_credentials=True)
+# Enable CORS
+CORS(app, resources={r"/*": {"origins": ["https://allansuresh.com"]}}, supports_credentials=True)
 
-@app.after_request
-def add_cors_headers(response):
-    response.headers.add('Access-Control-Allow-Origin', 'https://allansuresh.com')
-    response.headers.add('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
-    response.headers.add('Access-Control-Allow-Headers', 'Content-Type, Authorization')
-    return response
-
+@app.before_first_request
+def load_model():
+    global markov_model
+    model_path = Path(__file__).parent / "markov_model.pkl"
+    if model_path.exists():
+        with open(model_path, 'rb') as f:
+            markov_model = pickle.load(f)
+    else:
+        raise FileNotFoundError("Markov model file not found. Please run `build_model.py` to generate it.")
 
 @app.route('/generate', methods=['POST'])
 def generate_story():
@@ -31,7 +38,7 @@ def generate_story():
         start_phrase = data.get('start', 'harry potter')
         word_limit = int(data.get('limit', 100))
 
-        # Generate the story directly
+        # Generate the story using the pre-loaded model
         story = generate_fanfic(start_phrase, word_limit)
 
         return jsonify({'success': True, 'story': story})
