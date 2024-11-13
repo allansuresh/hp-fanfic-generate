@@ -24,8 +24,8 @@ A React application that generates creative stories using a Markov Chain model t
 
 ### Prerequisites
 
-- Node.js (version X.X.X or higher)
-- npm (version X.X.X or higher)
+- Node.js
+- npm
 
 ### Installation Steps
 
